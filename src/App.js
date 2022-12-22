@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
+import "./index.css";
+const App = () =>  {
+   let [text, setText] = useState("My Name Is Ameya Belvalkar");
 
-function App() {
+  const toggleTransition = () => {
+     setText(text === "My Name Is Ameya Belvalkar" ? "I Am Learning Full Stack Web Development" : "My Name Is Ameya Belvalkar");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>React Homework Assignment 21-12-2022</h1>
+      <SwitchTransition mode="out-in">
+        <CSSTransition
+          classNames="fade"
+          addEndListener={(node, done) => {
+            node.addEventListener("transitionend", done, false);
+          }}
+          key={text}
         >
-          Learn React
-        </a>
-      </header>
+          <div class="text">{text}</div>
+        </CSSTransition>
+      </SwitchTransition>
+      <button onClick={toggleTransition}>Toggle Text</button>
     </div>
   );
 }
